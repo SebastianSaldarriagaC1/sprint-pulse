@@ -1,0 +1,30 @@
+services:
+  postgres:
+    container_name: postgres-sql-sp
+    image: postgres
+    environment:
+      PG_USER: username
+      PG_PASSWORD: password
+      PG_DATA: /var/lib/postgresql/data
+      PG_DATABASE: sprint_pulse
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+  mail-dev:
+    container_name: mail-dev-sp
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
