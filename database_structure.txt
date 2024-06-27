@@ -1,0 +1,177 @@
+// Grey color: pending
+// Blue color: next in queue
+// Yellow color: to review/with doubts about
+// Green color: done
+
+// Users table
+user [icon: user, color:blue] {
+  id string pk
+  username string
+  email string
+  password string
+  points number
+}
+
+medal [icon: award]{
+  id string pk
+  user_id string pk
+  name string
+  description string
+  date_awarded date
+}
+
+skill_tag [icon: tag]{
+  id string pk
+  name string
+}
+
+skill [icon: arrow-up]{
+  id string pk
+  tag_id string fk
+  user_id string fk
+  level number
+  experience number
+  nex_level_req number
+}
+
+// Organizations table: an organization can contain several projects
+organization [icon: folder]{
+  id string pk
+  name string
+  description string
+}
+
+// Organization members table
+organization_member [icon:user-plus]{
+  id string pk
+  user_id string fk
+  organization_id string fk
+  organization_role string
+}
+
+// Projects table
+project [icon: list] {
+  id string pk
+  organization_id string fk
+  name string
+  description string
+  state string
+}
+
+// Project members: A project can have many users
+project_member [icon: user-plus] {
+  id string pk
+  user_id string fk
+  project_id string fk
+  project_role string
+}
+
+// Sprints table for a project
+sprint [icon: fast-forward]{
+  id string pk
+  project_id string fk
+  start_date date
+  end_date date
+}
+
+// Product backlog elements for a specific project
+p_backlog_e [icon: list]{
+  id string pk
+  project_id string fk
+  tag_id string fk
+  type string
+  title string
+  description string
+  priority string
+  status string
+  creation_date date
+  due_date date
+  completion date
+}
+
+// Sprint backlog elements for a specific sprint inside of a project
+s_backlog_e [icon: list]{
+  id string pk
+  sprint_id string fk
+  p_backlog_e_id string fk
+}
+
+// Backlog element types
+user_story [icon: book-open]{
+  id string pk fk
+  assigned_to string fk
+  acceptance_criteria string
+  story_points number
+}
+
+task [icon: clipboard]{
+  id string pk fk
+  assigned_to string fk
+  estimated_hours string
+  actual_hours string
+}
+
+// Other possibles aditions
+// epics
+// bug
+// feature
+// technical_debt
+// spike
+
+reward [icon: dollar-sign]{
+  id string pk
+  organization_id string fk
+  name string
+  description string
+  price number
+}
+
+scrum_event [icon: calendar]{
+  id string pk
+  project_id string fk
+  name string
+  description string
+  date timestamp
+}
+
+kudo_card [icon: message-circle]{
+  id string pk
+  sender_user_id string fk
+  receiver_user_id string fk
+  title string
+  message string
+  style string
+}
+
+// Relations
+// user
+user.id < organization_member.user_id
+user.id < project_member.user_id
+user.id < user_story.assigned_to
+user.id < task.assigned_to
+user.id < kudo_card.receiver_user_id
+user.id < kudo_card.sender_user_id
+user.id < skill.user_id
+user.id < medal.user_id
+
+// organization
+organization.id < organization_member.organization_id
+organization.id < project.organization_id
+organization.id < reward.organization_id
+
+// project
+project.id < project_member.project_id
+project.id < sprint.project_id
+project.id < p_backlog_e.project_id
+project.id < scrum_event.project_id
+
+// product backlog element
+p_backlog_e.id - s_backlog_e.p_backlog_e_id
+p_backlog_e.id - user_story.id
+p_backlog_e.id - task.id
+
+// sprint
+sprint.id < s_backlog_e.sprint_id
+
+skill_tag.id < skill.tag_id
+skill_tag.id < p_backlog_e.tag_id
