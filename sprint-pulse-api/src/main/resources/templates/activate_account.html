@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,16 +56,15 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>Welcome, {{username}}!</h1>
+    <h1>Account Activation</h1>
+    <p class="greeting" th:text="'Hello ' + ${username} + ','"></p>
+    <p>Thank you for signing up! Please use the following activation code to activate your account:</p>
+    <div class="activation-code"><span th:text="${activation_code}"></span></div>
+    <div class="activation-link">
+        <a th:href="${confirmationUrl}" target="_blank">Activate your account</a>
     </div>
-    <div class="content">
-        <p>Thank you for registering. Please click the button below to confirm your email address.</p>
-        <a href="{{confirmationUrl}}" class="button">Confirm Email</a>
-        <p>If the button above doesn't work, please copy and paste the following URL into your browser:</p>
-        <p>{{confirmationUrl}}</p>
-        <p>Your activation code is: <strong>{{activation_code}}</strong></p>
-    </div>
+    <p>If the button above doesn't work, please copy and paste the following URL into your browser:</p>
+    <p th:text="${confirmationUrl}"></p>
     <div class="footer">
         <p>&copy; 2024 SprintPulse. All rights reserved.</p>
         <p>If you didn't create an account with <strong>SprintPulse</strong>, please ignore this email.</p>
