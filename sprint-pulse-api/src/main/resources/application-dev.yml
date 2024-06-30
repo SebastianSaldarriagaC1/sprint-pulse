@@ -24,16 +24,22 @@ spring:
           trust: "*"
         auth: true
         starttls:
-          enable: true
+          enabled: true
         connectiontimeout: 5000
         timeout: 3000
         writetimeout: 5000
-
 application:
   security:
     jwt:
       secret-key: 3f82b2b0fbe5408e4c84f39704cdc812627f57cb6209ad36f1d43632c17736ee662edbbb9b116f57afa7c7c37a65451d0e7cc14d4ea546ff2a39d4d65d66db5528da0c0812a2b582b484f36c1cc09a8de7211d44157a1937d848ae494441d5ed84fdbe70451b9b875ba7ba29dbf0696a6b7d5066302d69618a7d51631d530662767a8476aaa39e07dea87f5a368783156c6f4d77ede1956bc89935b3b2048b7a138de60b4e015a0f1263a0ef9081946e070b37dc8a284bd13aabb11f28c0b6c3dd90474008b9cfbc3e3257497e439ec8ef43ff4367371bb5033d5a143d28e9fa245255fac3537e087e6828b6f8c01ec65f7099acfc6e92b2e52d5f219168f7f8
       expiration: 86400000
+      refresh-token:
+        expiration: 604800000
   mailing:
     frontend:
       activation-url: http://localhost:4200/activate-account
+  file:
+    uploads:
+      photos-output-path: ./uploads
+server:
+  port: 8088
