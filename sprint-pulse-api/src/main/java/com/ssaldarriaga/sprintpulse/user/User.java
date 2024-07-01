@@ -1,6 +1,12 @@
 package com.ssaldarriaga.sprintpulse.user;
 
+import com.ssaldarriaga.sprintpulse.backlog.project.ProjectBacklogElement;
+import com.ssaldarriaga.sprintpulse.kudos.KudoCard;
+import com.ssaldarriaga.sprintpulse.medal.Medal;
+import com.ssaldarriaga.sprintpulse.organization.OrganizationMember;
+import com.ssaldarriaga.sprintpulse.project.ProjectMember;
 import com.ssaldarriaga.sprintpulse.role.Role;
+import com.ssaldarriaga.sprintpulse.skill.Skill;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -44,6 +50,28 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
 
     private boolean enabled;
+
+    // Relationships
+    @OneToMany(mappedBy = "user")
+    private List<Medal> medals;
+
+    @OneToMany(mappedBy = "user")
+    private List<Skill> skills;
+
+    @OneToMany(mappedBy = "user")
+    private List<OrganizationMember> memberOrganizations;
+
+    @OneToMany(mappedBy = "user")
+    private List<ProjectMember> memberProjects;
+
+    @OneToMany(mappedBy = "user")
+    private List<ProjectBacklogElement> projectBacklogElements;
+
+    @OneToMany(mappedBy = "sender")
+    private List<KudoCard> sentKudos;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<KudoCard> receivedKudos;
 
     // Auditing columns
     @CreatedDate

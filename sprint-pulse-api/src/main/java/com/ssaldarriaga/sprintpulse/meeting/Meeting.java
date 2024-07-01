@@ -1,7 +1,10 @@
 package com.ssaldarriaga.sprintpulse.meeting;
 
 import com.ssaldarriaga.sprintpulse.common.BaseEntity;
+import com.ssaldarriaga.sprintpulse.project.Project;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +21,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Meeting extends BaseEntity {
 
-    private Integer projectId;
     private Integer name;
     private Integer description;
     private LocalDateTime date;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
 }

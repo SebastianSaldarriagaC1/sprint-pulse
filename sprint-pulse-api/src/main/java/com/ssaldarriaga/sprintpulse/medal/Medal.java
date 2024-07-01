@@ -1,7 +1,10 @@
 package com.ssaldarriaga.sprintpulse.medal;
 
 import com.ssaldarriaga.sprintpulse.common.BaseEntity;
+import com.ssaldarriaga.sprintpulse.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +21,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Medal extends BaseEntity {
 
-    private Integer userId;
     private String name;
     private String description;
     private LocalDateTime dateAwarded;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
