@@ -5,10 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("organization")
@@ -26,4 +23,10 @@ public class OrganizationController {
         return ResponseEntity.ok(service.createOrganization(request, connectedUser));
     }
 
+    @GetMapping("/{organization-id}")
+    public ResponseEntity<OrganizationResponse> findOrganizationById(
+            @PathVariable("organization-id") Integer id
+    ) {
+        return ResponseEntity.ok(service.findById(id));
+    }
 }

@@ -1,6 +1,7 @@
 package com.ssaldarriaga.sprintpulse.organization;
 
 import com.ssaldarriaga.sprintpulse.user.User;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,11 @@ public class OrganizationService {
         Organization organization = organizationMapper.toOrganization(request);
         // TODO: Add the user to the organization
         return organizationRepository.save(organization).getId();
+    }
+
+    public OrganizationResponse findById(Integer id) {
+        return organizationRepository.findById(id)
+                .map(organizationMapper::toOrganizationResponse)
+                .orElseThrow(() -> new EntityNotFoundException("Organization not found with the ID: " + id));
     }
 }

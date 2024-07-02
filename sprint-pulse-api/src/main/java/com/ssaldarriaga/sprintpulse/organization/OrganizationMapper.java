@@ -14,4 +14,12 @@ public class OrganizationMapper {
                 .description(request.description())
                 .build();
     }
+
+    public OrganizationResponse toOrganizationResponse(Organization organization) {
+        return OrganizationResponse.builder()
+                .id(organization.getId())
+                .name(organization.getName())
+                .description(organization.getDescription())
+                .build();
+    }
 }
