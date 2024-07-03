@@ -1,4 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  color-scheme: light dark;
+  --verdigris: #1eb7bcff;
+  --air-force-blue: #61889cff;
+  --blue-green: #1d9bc4ff;
+  --columbia-blue: #b5cdd5ff;
+  --prussian-blue: #133147ff;
+  --primary-color: linear-gradient(90deg, var(--verdigris), var(--blue-green));
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.primary-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  filter: brightness(1.1);
+}
+
+.primary-button:active {
+  filter: brightness(0.9);
 }
