@@ -12,14 +12,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class OrganizationService {
 
     private final OrganizationMapper organizationMapper;
-    private final organizationRepository organizationRepository;
+    private final OrganizationRepository organizationRepository;
 
     public Integer create(OrganizationRequest request, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();

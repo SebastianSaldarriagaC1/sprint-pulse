@@ -40,4 +40,5 @@ public class OrganizationController {
     ){
         return ResponseEntity.ok(service.findAll(page, size, connectedUser));
     }
+
 }
