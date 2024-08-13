@@ -12,7 +12,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  /* TODO: define font */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
